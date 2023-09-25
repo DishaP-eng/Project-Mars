@@ -2,59 +2,91 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MarsQA1.Helper;
+using MarsQA1.Specflow_Pages;
 using TechTalk.SpecFlow;
 
 namespace MarsQA1.Steps;
 
 [Binding]
-public sealed class Language_Steps
-{
-    // For additional details on SpecFlow step definitions see https://go.specflow.org/doc-stepdef
-
-    private readonly ScenarioContext _scenarioContext;
-
-    public Language_Steps(ScenarioContext scenarioContext)
+public sealed class Language_Steps:Driver
+{ 
+    Login_Page login = new Login_Page();
+    Language_page languageObj = new Language_page();
+    
+    [BeforeScenario]
+    public void setup()
     {
-        _scenarioContext = scenarioContext;
+        Initialize();
+        login.SingInAction();
+        login.LogInAction();
     }
 
-    [Given("the first number is (.*)")]
-    public void GivenTheFirstNumberIs(int number)
+    [AfterScenario]
+    public void Teardown()
     {
-        //TODO: implement arrange (precondition) logic
-        // For storing and retrieving scenario-specific data see https://go.specflow.org/doc-sharingdata 
-        // To use the multiline text or the table argument of the scenario,
-        // additional string/Table parameters can be defined on the step definition
-        // method. 
-
-        _scenarioContext.Pending();
+        languageObj.CloseSteps();
+    }
+    
+    [Given(@"I click on Add new language\.")]
+    public void GivenIClickOnAddNewLanguage()
+    {
+        
+        languageObj.LanguageTab(driver);
+    }
+    
+    [When(@"I Enter '(.*)' and '(.*)'")]
+    public void WhenIEnterAnd(string p0, string p1)
+    {
+        languageObj.AddNew(driver,p0,p1);
+        
+    }
+    [When(@"Click on Add Button\.")]
+    public void WhenClickOnAddButton()
+    {
+        languageObj.ClickAddButton();
+    }
+    
+    [Then(@"I should see a validation message '(.*)'")]
+    public void ThenIShouldSeeAValidationMessage(string p0)
+    {
+       languageObj.Add_Verify(driver,p0);
     }
 
-    [Given("the second number is (.*)")]
-    public void GivenTheSecondNumberIs(int number)
-    {
-        //TODO: implement arrange (precondition) logic
-        // For storing and retrieving scenario-specific data see https://go.specflow.org/doc-sharingdata 
-        // To use the multiline text or the table argument of the scenario,
-        // additional string/Table parameters can be defined on the step definition
-        // method. 
 
-        _scenarioContext.Pending();
+    [Given(@"I click on Edit icon")]
+    public void GivenIClickOnEditIcon()
+    {
+       languageObj.ClickEditIcon(driver);
     }
 
-    [When("the two numbers are added")]
-    public void WhenTheTwoNumbersAreAdded()
+    [When(@"I Edit '(.*)' and '(.*)")]
+    public void WhenIEditAnd(string p0, string p1)
     {
-        //TODO: implement act (action) logic
-
-        _scenarioContext.Pending();
+        languageObj.EditLanguage(p0,p1);
     }
 
-    [Then("the result should be (.*)")]
-    public void ThenTheResultShouldBe(int result)
+    [When(@"I click on Update button")]
+    public void WhenIClickOnUpdateButton()
     {
-        //TODO: implement assert (verification) logic
+       languageObj.ClickUpdateButton();
+    }
 
-        _scenarioContext.Pending();
+    [Then(@"I should see a Update validation message '(.*)'")]
+    public void ThenIShouldSeeAUpdateValidationMessage(string p0)
+    {
+        languageObj.Edit_Verify(driver,p0);
+    }
+
+    [When(@"I click on Delete icon")]
+    public void WhenIClickOnDeleteIcon()
+    {
+        languageObj.DeleteLanguage();
+    }
+    
+    [Then(@"I should see a Delete validation message '(.*)'")]
+    public void ThenIShouldSeeADeleteValidationMessage(string p0)
+    {
+        languageObj.Delete_Verify(driver,p0);
     }
 }

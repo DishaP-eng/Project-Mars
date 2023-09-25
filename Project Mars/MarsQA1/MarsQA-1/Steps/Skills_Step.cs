@@ -1,60 +1,92 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
+using MarsQA1.Helper;
+using MarsQA1.Specflow_Pages;
 using TechTalk.SpecFlow;
 
 namespace MarsQA1.Steps;
 
 [Binding]
-public sealed class Skills_Step
+public sealed class Skills_Step : Driver
 {
-    // For additional details on SpecFlow step definitions see https://go.specflow.org/doc-stepdef
+    Login_Page login = new Login_Page();
+    Skill_Page skillsObj = new Skill_Page();
 
-    private readonly ScenarioContext _scenarioContext;
-
-    public Skills_Step(ScenarioContext scenarioContext)
+    public void setup()
     {
-        _scenarioContext = scenarioContext;
+        Initialize();
+        login.SingInAction();
+        login.LogInAction();
     }
 
-    [Given("the first number is (.*)")]
-    public void GivenTheFirstNumberIs(int number)
+    [AfterScenario]
+    public void Teardown()
     {
-        //TODO: implement arrange (precondition) logic
-        // For storing and retrieving scenario-specific data see https://go.specflow.org/doc-sharingdata 
-        // To use the multiline text or the table argument of the scenario,
-        // additional string/Table parameters can be defined on the step definition
-        // method. 
-
-        _scenarioContext.Pending();
+        skillsObj.CloseSteps();
     }
 
-    [Given("the second number is (.*)")]
-    public void GivenTheSecondNumberIs(int number)
+    [Given(@"I click on Add new Skill")]
+    public void GivenIClickOnAddNewSkill()
     {
-        //TODO: implement arrange (precondition) logic
-        // For storing and retrieving scenario-specific data see https://go.specflow.org/doc-sharingdata 
-        // To use the multiline text or the table argument of the scenario,
-        // additional string/Table parameters can be defined on the step definition
-        // method. 
-
-        _scenarioContext.Pending();
+       skillsObj.SkillTab(driver);
     }
 
-    [When("the two numbers are added")]
-    public void WhenTheTwoNumbersAreAdded()
+    [When(@"I Enter '(.*)' and '(.*)' in skill feature")]
+    public void WhenIEnterAndInSkillFeature(string p0, string p1)
     {
-        //TODO: implement act (action) logic
-
-        _scenarioContext.Pending();
+       skillsObj.AddNewSkill(driver,p0,p1);
     }
 
-    [Then("the result should be (.*)")]
-    public void ThenTheResultShouldBe(int result)
+    [When(@"I Click on Add Button of Skill feature")]
+    public void WhenIClickOnAddButtonOfSkillFeature()
     {
-        //TODO: implement assert (verification) logic
+        skillsObj.ClickAddButton();
+    }
 
-        _scenarioContext.Pending();
+    [Then(@"I should see a Skill Validation message '(.*)'")]
+    public void ThenIShouldSeeASkillValidationMessage(string p0)
+    {
+        skillsObj.SkillAdd_Verify(driver,p0);
+    }
+
+
+    [Given(@"I click on Edit icon for skill")]
+    public void GivenIClickOnEditIconForSkill()
+    {
+        skillsObj.ClickEditIconSkill(driver);
+    }
+
+    [When(@"I Update '(.*)' and '(.*) in skill feature")]
+    public void WhenIUpdateAndInSkillFeature(string p0, string p1)
+    {
+        skillsObj.EditSkill(driver,p0,p1);
+    }
+
+
+    [When(@"I click on Update button for skill")]
+    public void WhenIClickOnUpdateButtonForSkill()
+    {
+        skillsObj.ClickUpdateButton();
+    }
+
+    [Then(@"I should see a Skill Update validation message '(.*)'")]
+    public void ThenIShouldSeeASkillUpdateValidationMessage(string p0)
+    {
+        skillsObj.SkillEditVerify(driver,p0);
+    }
+
+    [When(@"I click on Delete icon for Skill")]
+    public void WhenIClickOnDeleteIconForSkill()
+    {
+      skillsObj.ClickDeleteSkill();
+    }
+
+    [Then(@"I should see a Skill Delete validation message '(.*)'")]
+    public void ThenIShouldSeeASkillDeleteValidationMessage(string p0)
+    {
+        skillsObj.SkillDeleteVerify(driver,p0);
     }
 }

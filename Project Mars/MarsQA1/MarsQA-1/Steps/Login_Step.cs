@@ -2,59 +2,30 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MarsQA1.Helper;
+using MarsQA1.Specflow_Pages;
+using OpenQA.Selenium.Chrome;
 using TechTalk.SpecFlow;
 
 namespace MarsQA1.Steps;
 
 [Binding]
-public sealed class Login_Step
+public sealed class Login_Step:Driver
 {
-    // For additional details on SpecFlow step definitions see https://go.specflow.org/doc-stepdef
-
-    private readonly ScenarioContext _scenarioContext;
-
-    public Login_Step(ScenarioContext scenarioContext)
+    Login_Page login = new Login_Page();
+    
+    [When(@"I click on Login button")]
+    public void WhenIClickOnLoginButton()
     {
-        _scenarioContext = scenarioContext;
+        //launch the browser
+        Initialize();
+        login.SingInAction();
+        //ExelLibHelper.PopulateInCollection(ConstantHelpers.MarsDataPath, "Credentials");
     }
 
-    [Given("the first number is (.*)")]
-    public void GivenTheFirstNumberIs(int number)
+    [Then(@"I should able to login successfully using valid credential")]
+    public void ThenIShouldAbleToLoginSuccessfullyUsingValidCredential()
     {
-        //TODO: implement arrange (precondition) logic
-        // For storing and retrieving scenario-specific data see https://go.specflow.org/doc-sharingdata 
-        // To use the multiline text or the table argument of the scenario,
-        // additional string/Table parameters can be defined on the step definition
-        // method. 
-
-        _scenarioContext.Pending();
-    }
-
-    [Given("the second number is (.*)")]
-    public void GivenTheSecondNumberIs(int number)
-    {
-        //TODO: implement arrange (precondition) logic
-        // For storing and retrieving scenario-specific data see https://go.specflow.org/doc-sharingdata 
-        // To use the multiline text or the table argument of the scenario,
-        // additional string/Table parameters can be defined on the step definition
-        // method. 
-
-        _scenarioContext.Pending();
-    }
-
-    [When("the two numbers are added")]
-    public void WhenTheTwoNumbersAreAdded()
-    {
-        //TODO: implement act (action) logic
-
-        _scenarioContext.Pending();
-    }
-
-    [Then("the result should be (.*)")]
-    public void ThenTheResultShouldBe(int result)
-    {
-        //TODO: implement assert (verification) logic
-
-        _scenarioContext.Pending();
+        login.LogInAction();
     }
 }

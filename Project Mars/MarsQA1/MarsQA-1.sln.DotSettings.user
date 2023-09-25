@@ -1,0 +1,6 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=273ca74e_002D73c1_002D423a_002D876a_002Dee7f5a2918e6/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="_2EditSkill(&amp;quot;1&amp;quot;,&amp;quot;Science&amp;quot;,&amp;quot;Expert&amp;quot;,&amp;quot;\&amp;quot;Science has been updated to your Skills\&amp;quot;&amp;quot;,null)" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;NUnit3x::98359D43-FFC6-4A99-BB6F-6E23B295ABC9::net6.0::MarsQA1.Features.SkillsFeature._2EditSkill("1","Science","Expert","\"Science has been updated to your Skills\"",null)&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
