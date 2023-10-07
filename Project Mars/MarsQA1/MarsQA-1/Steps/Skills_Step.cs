@@ -12,22 +12,8 @@ namespace MarsQA1.Steps;
 [Binding]
 public sealed class Skills_Step : Driver
 {
-    Login_Page login = new Login_Page();
     Skill_Page skillsObj = new Skill_Page();
-
-    public void setup()
-    {
-        Initialize();
-        login.SingInAction();
-        login.LogInAction();
-    }
-
-    [AfterScenario]
-    public void Teardown()
-    {
-        skillsObj.CloseSteps();
-    }
-
+    
     [Given(@"I click on Add new Skill")]
     public void GivenIClickOnAddNewSkill()
     {
@@ -88,5 +74,23 @@ public sealed class Skills_Step : Driver
     public void ThenIShouldSeeASkillDeleteValidationMessage(string p0)
     {
         skillsObj.SkillDeleteVerify(driver,p0);
+    }
+
+    [When(@"I click on Cancel Button")]
+    public void WhenIClickOnCancelButton()
+    {
+        skillsObj.CancelButton(driver);
+    }
+
+    [Given(@"I Click on Skill tab")]
+    public void GivenIClickOnSkillTab()
+    {
+        skillsObj.SkillTab(driver);
+    }
+
+    [Then(@"The name of the tab should be ""(.*)""\.")]
+    public void ThenTheNameOfTheTabShouldBe(string skill)
+    {
+        skillsObj.TabNameCheck(driver);
     }
 }

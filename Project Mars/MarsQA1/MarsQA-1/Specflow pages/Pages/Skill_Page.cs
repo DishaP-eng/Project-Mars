@@ -38,8 +38,6 @@ public class Skill_Page
     }
     public void ClickAddButton()
     {
-
-        //Click on Add button
         Driver.driver
             .FindElement(By.XPath(
                 "//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/div/span/input[1]"))
@@ -131,7 +129,16 @@ public class Skill_Page
                     Assert.AreEqual("Science has been updated to your Skills",toastElement.Text);
                     break;
                 case "Scenario2":
+                    Assert.AreEqual("Please enter Skill and experience level",toastElement.Text);
+                    break;
+                case "Scenario3":
+                    Assert.AreEqual("Please enter Skill and experience level",toastElement.Text);
+                    break;
+                case "Scenario4":
                     Assert.AreEqual("This skill is already exist in your skill list",toastElement.Text);
+                    break;
+                case "Scenario5":
+                    Assert.AreEqual("This is for test This is for test added to your skills",toastElement.Text);
                     break;
             }
         }
@@ -171,13 +178,24 @@ public class Skill_Page
 
             }
         }
-
         catch (Exception e)
         {
             Console.WriteLine("Exception occurred:" + e.Message);
             throw;
         }
-    
+    }
+
+    public void CancelButton(IWebDriver driver)
+    {
+        Wait.WaitToBeClickable(driver, "XPath","//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/div/span/input[2]", 3);
+        Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/div/span/input[2]")).Click();
+    }
+    public void TabNameCheck(IWebDriver driver)
+    {
+        IWebElement tabElement = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[1]/a[2]"));
+        string tabName = tabElement.Text;
+        string expectedTabName = "Skills";
+        Assert.AreEqual(expectedTabName,tabName,$"Expected tab name:{expectedTabName},Actual tab name:{tabName}");
     }
     public void CloseSteps()
     {

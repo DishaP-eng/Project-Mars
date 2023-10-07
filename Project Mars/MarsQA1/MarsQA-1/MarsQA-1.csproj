@@ -38,6 +38,9 @@
       <Compile Remove="Drivers\**" />
       <Compile Remove="Pages\**" />
       <Compile Remove="Helper\**" />
+      <Compile Remove="Specflow pages\Pages\Home_Page.cs" />
+      <Compile Remove="Specflow pages\Pages\Components\ProfileLanguageTabComponents.cs" />
+      <Compile Remove="Specflow pages\Pages\Components\LanguageTabComponent.cs" />
     </ItemGroup>
 
     <ItemGroup>
@@ -53,7 +56,15 @@
       <None Remove="Pages\**" />
       <None Remove="Helper\**" />
 
+
     </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Specflow pages\Pages\Components\" />
+
+
+    </ItemGroup>
+
 
 
 

@@ -1,5 +1,6 @@
 Feature: Skills
-Add,Edit,Delete(CRUD) for Skills
+As a Seller I want the feature to manage my Skills details.
+So that I am able to add, edit or delete my Skills records.
 	
    
     Background: I am on Skills Profile Page	
@@ -25,9 +26,12 @@ Add,Edit,Delete(CRUD) for Skills
         Then I should see a Skill Update validation message '<Validation_Message>'
 		
     Examples: 
-      | Order | Skill   | Level    | Validation Message                        |
-      | 1     | Science | Expert | "Science has been updated to your Skills" |
-      | 2     | Science | Expert | "This skill is already exist in your language list" |
+      | Order | Skill                             | Level              | Validation Message                                       |
+      | 1     | Science                           | Expert             | "Science has been updated to your Skills"                |
+      | 2     |                                   | Beginner           | "Please enter Skill and experience level"                |
+      | 3     | Communication                     | Skill Level | "Please enter Skill and experience level"                |
+      | 4     | Science                           | Expert             | "This skill is already exist in your language list"      |
+      | 5     | This is for test This is for test | Intermediate       | "This is for test This is for test added to your skills" |
 		
 
     Scenario: 3 Delete Skill
@@ -35,5 +39,19 @@ Add,Edit,Delete(CRUD) for Skills
         Then I should see a Skill Delete validation message '<Validation_Message>'
 		
     Examples: 
-      | Skill   | Level    | Validation Message |
+      | Skill   | Level    | Validation Message          |
       | Science | Beginner | "Science has been deleted"  |
+      
+	Scenario: 4 Cancel Skill
+		Given I click on Add new Skill
+		When   I Enter '<Skill>' and '<Level>'
+		When  I click on Cancel Button	
+    
+	Examples: 
+	  | Order | Skill   | Level      | 
+	  | 1     | Science | Beginner | 
+   
+	Scenario: 5 Tab Name Verification
+		Given I Click on Skill tab
+		Then The name of the tab should be "Skill".
+   

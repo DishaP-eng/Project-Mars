@@ -11,22 +11,7 @@ namespace MarsQA1.Steps;
 [Binding]
 public sealed class Language_Steps:Driver
 { 
-    Login_Page login = new Login_Page();
     Language_page languageObj = new Language_page();
-    
-    [BeforeScenario]
-    public void setup()
-    {
-        Initialize();
-        login.SingInAction();
-        login.LogInAction();
-    }
-
-    [AfterScenario]
-    public void Teardown()
-    {
-        languageObj.CloseSteps();
-    }
     
     [Given(@"I click on Add new language\.")]
     public void GivenIClickOnAddNewLanguage()
@@ -44,8 +29,9 @@ public sealed class Language_Steps:Driver
     [When(@"Click on Add Button\.")]
     public void WhenClickOnAddButton()
     {
-        languageObj.ClickAddButton();
+       languageObj.ClickAddButton();
     }
+    
     
     [Then(@"I should see a validation message '(.*)'")]
     public void ThenIShouldSeeAValidationMessage(string p0)
@@ -63,13 +49,13 @@ public sealed class Language_Steps:Driver
     [When(@"I Edit '(.*)' and '(.*)")]
     public void WhenIEditAnd(string p0, string p1)
     {
-        languageObj.EditLanguage(p0,p1);
+        languageObj.EditLanguage(driver,p0,p1);
     }
 
     [When(@"I click on Update button")]
     public void WhenIClickOnUpdateButton()
     {
-       languageObj.ClickUpdateButton();
+       languageObj.ClickUpdateButton(driver);
     }
 
     [Then(@"I should see a Update validation message '(.*)'")]
@@ -88,5 +74,22 @@ public sealed class Language_Steps:Driver
     public void ThenIShouldSeeADeleteValidationMessage(string p0)
     {
         languageObj.Delete_Verify(driver,p0);
+    }
+
+    [When(@"I click on Cancel Button\.")]
+    public void WhenIClickOnCancelButton()
+    {
+        languageObj.CancelButton(driver);
+    }
+    [Given(@"I Click on Language tab")]
+    public void GivenIClickOnLanguageTab()
+    {
+        languageObj.LanguageTab(driver);
+    } 
+
+    [Then(@"The name of the tab should be ""(.*)""")]
+    public void ThenTheNameOfTheTabShouldBe(string language)
+    {
+        languageObj.TabNameCheck(driver);
     }
 }

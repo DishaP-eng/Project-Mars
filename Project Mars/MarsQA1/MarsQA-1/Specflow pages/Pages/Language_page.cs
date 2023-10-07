@@ -11,45 +11,37 @@ namespace MarsQA1.Specflow_Pages;
 
 public class Language_page
 {
+    
     public void LanguageTab(IWebDriver driver)
     {
-        //click on Language tab
-        Thread.Sleep(2000);
-       
-        Driver.driver.FindElement(
-                By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[1]/a[1]")).Click();
-       
-        //click on Add new Language
-         Wait.WaitToBeClickable(driver, "XPath", "//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/thead/tr/th[3]/div", 5);
-         Driver.driver.FindElement(By.XPath(
-            "//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/thead/tr/th[3]/div")).Click();
+        Wait.WaitToBeClickable(driver, "XPath","//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/thead/tr/th[3]/div" , 3); 
+        Driver.driver.FindElement(By.XPath(
+            "//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/thead/tr/th[3]/div")).Click();
     }
 
     public void AddNew(IWebDriver driver,string language, string dropdownValue)
     {
-        //Enter the language in the textbox
+        //Enter the language in the TextBox
         Driver.driver.FindElement(By.Name("name")).SendKeys(language);
+        
+       //Find the Dropdown Element
         Wait.WaitToBeClickable(driver, "Name", "level", 5);
-        //Find the dropdown element
         IWebElement dropdown = Driver.driver.FindElement(By.Name("level"));
-
         SelectElement select = new SelectElement(dropdown);
         select.SelectByText(dropdownValue);
+        
     }
 
     public void ClickAddButton()
     {
-        //Click on Add button
-        Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/div/div[3]/input[1]")).Click();
-        Thread.Sleep(2000);
-
+        Driver.driver.FindElement(By.XPath("//*[@id=\'account-profile-section\']/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/div/div[3]/input[1]")).Click();
     }
 
     public void Add_Verify(IWebDriver driver,string validationMessage)
     {
        try
        {
-           Wait.WaitToBeVisible(driver, "XPath", "//div[@class='ns-box-inner']", 30);
+           Wait.WaitToBeVisible(driver, "XPath", "//div[@class='ns-box-inner']", 5);
            IWebElement toastElement = Driver.driver.FindElement(By.XPath("//div[@class='ns-box-inner']"));
 
            var scenarioTitle = ScenarioContext.Current.ScenarioInfo.Title;
@@ -77,18 +69,16 @@ public class Language_page
            Console.WriteLine("Exception occurred:" + e.Message);
            throw;
        }
-    }// /html/body/div[1]/div
-    // /html/body/div[1]/div
+    }
         
     public void ClickEditIcon(IWebDriver driver)
     {
-        //Click on Edit icon
         Wait.WaitToBeClickable(driver, "XPath","//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody/tr/td[3]/span[1]/i" , 3);
         Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody/tr/td[3]/span[1]/i")).Click();
-        //*[@id="account-profile-section"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[2]/tr/td[3]/span[1]/i
+        Thread.Sleep(2000);
     }
 
-    public void EditLanguage(string language, string dropdownValue)
+    public void EditLanguage(IWebDriver driver,string language, string dropdownValue)
     {
         //language click
         Driver.driver
@@ -97,30 +87,31 @@ public class Language_page
             .Click();
 
         //language clear
-        Thread.Sleep(2000);
         Driver.driver
             .FindElement(By.XPath(
                 "//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody/tr/td/div/div[1]/input"))
             .Clear();
 
-        //Add new value in language Textbox
-        Thread.Sleep(2000);
+        //Add new value in language TextBox
         Driver.driver
             .FindElement(By.XPath(
                 "//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody/tr/td/div/div[1]/input"))
             .SendKeys(language);
 
         //Select Dropdown 
+        Wait.WaitToBeClickable(driver, "Name", "level", 3);
         IWebElement dropdown = Driver.driver.FindElement(By.Name("level"));
 
         SelectElement select = new SelectElement(dropdown);
         select.SelectByText(dropdownValue);
-    }
-    public void ClickUpdateButton()
-    {
-    //Click on update
-        Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody/tr/td/div/span/input[1]")).Click();
         
+    }
+    public void ClickUpdateButton(IWebDriver driver)
+    { 
+        Thread.Sleep(2000);
+        //Wait.WaitToBeClickable(driver, "XPath"," \"//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody/tr/td/div/span/input[1]", 10);
+        Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody/tr/td/div/span/input[1]")).Click();
+        Thread.Sleep(2000);
     }
 
     public void Edit_Verify(IWebDriver driver,string validationMessage)
@@ -137,7 +128,16 @@ public class Language_page
                     Assert.AreEqual("Spanish has been updated to your languages",toastElement.Text);
                     break;
                 case "Scenario2":
+                    Assert.AreEqual("Please enter language and level",toastElement.Text);
+                    break;
+                case "Scenario3":
+                    Assert.AreEqual("Please enter language and level",toastElement.Text);
+                    break;
+                case "Scenario4":
                     Assert.AreEqual("This language is already exist in your language list",toastElement.Text);
+                    break;
+                case "Scenario5":
+                    Assert.AreEqual("This is for test This is for test added to your languages",toastElement.Text);
                     break;
             }
         }
@@ -156,19 +156,6 @@ public class Language_page
 
     public void Delete_Verify(IWebDriver driver,string validationMessage)
     {
-        /*
-        IWebElement English = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody/tr/td[1]"));
-
-        if (English.Text != "English")
-        {
-            Assert.Pass("Language has been deleted successfully");
-            
-        }
-        else
-        {
-            Assert.Fail("Language has not been deleted");
-        }
-        */
         try
         {
             Wait.WaitToBeVisible(driver, "XPath", "//div[@class='ns-box-inner']", 20);
@@ -178,9 +165,8 @@ public class Language_page
             switch (scenarioTitle)
             {
                 case "Scenario1":
-                    Assert.AreEqual("Spanish has been deleted from your languages",toastElement.Text);
+                    Assert.AreEqual("Spanish has been deleted from your languages", toastElement.Text);
                     break;
-                
             }
         }
         catch (Exception e)
@@ -188,8 +174,21 @@ public class Language_page
             Console.WriteLine("Exception occurred:" + e.Message);
             throw;
         }
-        
     }
+    public void CancelButton(IWebDriver driver)
+    {
+        Wait.WaitToBeClickable(driver, "XPath","//*[@id=\'account-profile-section\']/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/div/div[3]/input[2]" , 3);
+        Driver.driver.FindElement(By.XPath("//*[@id=\'account-profile-section\']/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/div/div[3]/input[2]")).Click();
+    }
+
+    public void TabNameCheck(IWebDriver driver)
+    {
+        IWebElement tabElement = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[1]/a[1]"));
+        string tabName = tabElement.Text;
+        string expectedTabName = "Languages";
+        Assert.AreEqual(expectedTabName,tabName,$"Expected tab name:{expectedTabName},Actual tab name:{tabName}");
+    }
+    
     public void CloseSteps()
     {
         Driver.driver.Quit();

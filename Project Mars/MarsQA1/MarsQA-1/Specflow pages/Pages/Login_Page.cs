@@ -10,9 +10,6 @@ public class Login_Page
 {
     public void SingInAction()
     {
-        
-        //driver.Navigate().GoToUrl("http://localhost:8080/");
-        //Cilck on Sign In Button
         Driver.NavigateUrl();
         Thread.Sleep(2000);
         IWebElement signInButton = Driver.driver.FindElement(By.XPath("//*[@id='home']/div/div/div[1]/div/a"));
@@ -43,8 +40,5 @@ public class Login_Page
         Thread.Sleep(2000);
         IWebElement LoginButton = Driver.driver.FindElement(By.XPath("/html/body/div[2]/div/div/div[1]/div/div[4]/button"));
         LoginButton.Click();
-        
-
-
     }
 }

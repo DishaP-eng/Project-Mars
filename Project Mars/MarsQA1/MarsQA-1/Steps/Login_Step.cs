@@ -17,7 +17,6 @@ public sealed class Login_Step:Driver
     [When(@"I click on Login button")]
     public void WhenIClickOnLoginButton()
     {
-        //launch the browser
         Initialize();
         login.SingInAction();
         //ExelLibHelper.PopulateInCollection(ConstantHelpers.MarsDataPath, "Credentials");
