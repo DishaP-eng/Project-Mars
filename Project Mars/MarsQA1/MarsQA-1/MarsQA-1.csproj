@@ -59,11 +59,6 @@
 
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Specflow pages\Pages\Components\" />
-
-
-    </ItemGroup>
 
 
 
