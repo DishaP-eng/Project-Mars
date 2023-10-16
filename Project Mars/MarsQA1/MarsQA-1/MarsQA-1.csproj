@@ -1,0 +1,67 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <RootNamespace>MarsQA1</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="DotNetSeleniumExtras.WaitHelpers" Version="3.11.0" />
+        <PackageReference Include="ExcelDataReader" Version="3.7.0-develop00385" />
+        <PackageReference Include="ExcelDataReader.DataSet" Version="3.7.0-develop00385" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0"/>
+        <PackageReference Include="Microsoft.NETCore.Platforms" Version="8.0.0-preview.7.23375.6" />
+        <PackageReference Include="Selenium.Support" Version="4.12.4" />
+        <PackageReference Include="Selenium.WebDriver" Version="4.12.4" />
+        <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="117.0.5938.8800" />
+        <PackageReference Include="SpecFlow" Version="4.0.31-beta" />
+        <PackageReference Include="SpecFlow.NUnit" Version="4.0.31-beta" />
+        <PackageReference Include="nunit" Version="3.13.1"/>
+        <PackageReference Include="NUnit3TestAdapter" Version="3.17.0"/>
+        <PackageReference Include="FluentAssertions" Version="5.10.3"/>
+        <PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="4.0.31-beta" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <SpecFlowFeatureFiles Remove="Features\Calculator.feature" />
+      <SpecFlowFeatureFiles Remove="SpecflowTests\Data\**" />
+      <SpecFlowFeatureFiles Remove="Drivers\**" />
+      <SpecFlowFeatureFiles Remove="Pages\**" />
+      <SpecFlowFeatureFiles Remove="Helper\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="Features\Calculator.feature.cs" />
+      <Compile Remove="Steps\CalculatorStepDefinitions.cs" />
+      <Compile Remove="Steps\Language.cs" />
+      <Compile Remove="SpecflowTests\Data\**" />
+      <Compile Remove="Drivers\**" />
+      <Compile Remove="Pages\**" />
+      <Compile Remove="Helper\**" />
+      <Compile Remove="Specflow pages\Pages\Home_Page.cs" />
+      <Compile Remove="Specflow pages\Pages\Components\ProfileLanguageTabComponents.cs" />
+      <Compile Remove="Specflow pages\Pages\Components\LanguageTabComponent.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="SpecflowTests\Data\**" />
+      <EmbeddedResource Remove="Drivers\**" />
+      <EmbeddedResource Remove="Pages\**" />
+      <EmbeddedResource Remove="Helper\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="SpecflowTests\Data\**" />
+      <None Remove="Drivers\**" />
+      <None Remove="Pages\**" />
+      <None Remove="Helper\**" />
+
+
+    </ItemGroup>
+
+
+
+
+
+
+</Project>
